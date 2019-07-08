@@ -134,8 +134,8 @@ contract EventTickets {
         myEvent.totalTickets - myEvent.sales > _ticketsPurchased,
         "Verify there are enough tickets in stock"
       );
-      myEvent.buyers[msg.sender].sales += _ticketsPurchased;
-      myEvent.totalTickets -= _ticketsPurchased;
+      myEvent.buyers[msg.sender].totalTickets += _ticketsPurchased;
+      myEvent.sales += _ticketsPurchased;
       myEvent.buyers[msg.sender].transfer(msg.value - (_ticketsPurchased * TICKET_PRICE));
     }
 
