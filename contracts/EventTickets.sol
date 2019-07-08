@@ -100,7 +100,7 @@ contract EventTickets {
       public
       returns (uint)
     {
-      return myEvent.buyers[address].sales;
+      return myEvent.buyers[address].totalTickets;
     }
 
     /*
