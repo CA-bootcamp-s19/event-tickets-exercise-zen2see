@@ -156,8 +156,7 @@ contract EventTickets {
         myEvent.buyers[msg.sender].sales > 0,
         "Verify requester has purchased tickets"
       );
-      myEvent.buyers[msg.sender].sales -= _ticketsPurchased;
-      myEvent.totalTickets += _ticketsPurchased;
+      myEvent.totalTickets += getBuyerTicketCount(msg.sender);
 //      delete myEvent.buyers[msg.sender];
       myEvent.buyers[msg.sender].transfer(_ticketsPurchased * TICKET_PRICE);
 //    myEvent.buyers[msg.sender].transfer(msg.value - (_ticketsPurchased X TICKET_PRICE))
