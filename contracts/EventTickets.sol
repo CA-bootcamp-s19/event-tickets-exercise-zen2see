@@ -116,12 +116,12 @@ contract EventTickets {
     function buyTickets(uint _ticketsPurchased)
       payable
     {
-      /*require(
+      require(
         myEvent.isOpen == true,
         "Verify the event is open"
       );
       require(
-        _ticketsPurchased x TICKET_PRICE < msg.value,
+        (_ticketsPurchased * TICKET_PRICE) < msg.value,
         "Verify transaction value is sufficient for _ticketsPurchased"
       );*/
       require(
@@ -130,7 +130,7 @@ contract EventTickets {
       );
       myEvent.buyers[msg.sender].sales += _ticketsPurchased;
       myEvent.totalTickets -= _ticketsPurchased;
-      myEvent.buyers[msg.sender].transfer(msg.value - (_ticketsPurchased X TICKET_PRICE));
+      myEvent.buyers[msg.sender].transfer(msg.value - (_ticketsPurchased * TICKET_PRICE));
     }
 
     /*
