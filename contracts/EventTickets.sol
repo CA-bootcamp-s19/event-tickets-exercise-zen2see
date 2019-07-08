@@ -11,7 +11,7 @@ contract EventTickets {
         Use the appropriate keyword to create an associated getter function.
         Use the appropriate keyword to allow ether transfers.
      */
-    address public payable owner;
+    address payable public owner;
     uint   TICKET_PRICE = 100 wei;
 
     /*
@@ -68,7 +68,7 @@ contract EventTickets {
         Set the owner to the creator of the contract.
         Set the appropriate myEvent details.
     */
-    constructor(_description, _URL, _totalTickets) {
+    constructor(string _description, string _URL, uint _totalTickets) {
       owner = msg.sender;
       myEvent.description = _description;
       myEvent.URL = _URL;
