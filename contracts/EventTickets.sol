@@ -158,9 +158,9 @@ contract EventTickets {
       );
       myEvent.totalTickets += getBuyerTicketCount(msg.sender);
 //      delete myEvent.buyers[msg.sender];
-      myEvent.buyers[msg.sender].transfer(_ticketsPurchased * TICKET_PRICE);
+      myEvent.buyers[msg.sender].transfer(getBuyerTicketCount(msg.sender) * TICKET_PRICE);
 //    myEvent.buyers[msg.sender].transfer(msg.value - (_ticketsPurchased X TICKET_PRICE))
-      emit LogGetRefund(msg.sender, _ticketsPurchased);
+      emit LogGetRefund(msg.sender, getBuyerTicketCount(msg.sender));
     }
 
     /*
