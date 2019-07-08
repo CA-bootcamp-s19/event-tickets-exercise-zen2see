@@ -25,7 +25,7 @@ contract EventTickets {
       string URL;
       uint totalTickets;
       uint sales;
-      mapping (sales => address) buyers;
+      mapping (address => uint) buyers;
       bool isOpen;
     }
 
