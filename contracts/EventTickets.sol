@@ -152,7 +152,7 @@ contract EventTickets {
       myEvent.buyers[msg.sender].sales -= _ticketsPurchased;
       myEvent.totalTickets += _ticketsPurchased;
 //      delete myEvent.buyers[msg.sender];
-      myEvent.buyers[msg.sender]transfer(_ticketsPurchased X TICKET_PRICE);
+      myEvent.buyers[msg.sender]transfer(_ticketsPurchased * TICKET_PRICE);
 //    myEvent.buyers[msg.sender].transfer(msg.value - (_ticketsPurchased X TICKET_PRICE))
       emit LogGetRefund(msg.sender, _ticketsPurchased);
     }
@@ -169,7 +169,7 @@ contract EventTickets {
     function endSale()
       isOwner()
     {
-      uint balance = (myEvent.sales X TICKET_PRICE);
+      uint balance = (myEvent.sales * TICKET_PRICE);
       myEvent.isOpen = false;
       owner.transfer(balance);
       emit LogEndSale(owner, balance);
