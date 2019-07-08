@@ -121,7 +121,7 @@ contract EventTickets {
         "Verify the event is open"
       );
       require(
-        _ticketsPurchased x TICKET_PRICE < msg.value,
+        ((_ticketsPurchased x TICKET_PRICE) < msg.value),
         "Verify transaction value is sufficient for _ticketsPurchased"
       );
       require(
