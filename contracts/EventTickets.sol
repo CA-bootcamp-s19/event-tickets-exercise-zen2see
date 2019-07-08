@@ -30,6 +30,7 @@ contract EventTickets {
     }
 
     Event myEvent;
+
     /*
         Define 3 logging events.
         LogBuyTickets should provide information about the purchaser and the number of tickets purchased.
@@ -37,18 +38,18 @@ contract EventTickets {
         LogEndSale should provide infromation about the contract owner and the balance transferred to them.
     */
     event LogBuyTickets(
-      address purchaser;
-      uint ticketsPurchased;
+      address purchaser,
+      uint ticketsPurchased
     );
 
     event LogGetRefund(
-      address requester;
-      uint ticketsRefunded;
+      address requester,
+      uint ticketsRefunded
     );
 
     event LogEndSale(
-      address owner;
-      uint balance;
+      address owner,
+      uint balance
     );
 
     /*
