@@ -54,7 +54,7 @@ contract EventTickets {
     /*
         Create a modifier that throws an error if the msg.sender is not the owner.
     */
-    modifier isOwner {
+    modifier isOwner() {
       require(
         msg.sender == owner,
         "Only owner can call this function."
@@ -127,12 +127,9 @@ contract EventTickets {
         ((myEvent.totalTickets - myEvent.sales) > _ticketsPurchased),
         "Veriffy there are enough tickets in stock"
       );
-      myEvent.[msg.sender].buyer.sales += _ticketsPurchased;
+      myEvent.buyers[msg.sender].sales += _ticketsPurchased;
       myEvent.totalTickets -= _ticketsPurchased;
-      myEvent.[msg.sender].seller.transfer(items[sku].price);
-
-
-
+      myEvent.buyers[msg.sender].transfer(msg.value - (_ticketsPurchased X TICKET_PRICE));
     }
 
     /*
@@ -144,6 +141,20 @@ contract EventTickets {
             - Transfer the appropriate amount to the refund requester.
             - Emit the appropriate event.
     */
+    function getRefund()
+    payable
+    {
+      require(
+        myEvent.buyers[msg.sender].sales > 0,
+        "Verify requester has purchased tickets"
+      );
+      myEvent.buyers[msg.sender].sales -= _ticketsPurchased;
+      myEvent.totalTickets += _ticketsPurchased;
+//      delete myEvent.buyers[msg.sender];
+      myEvent.buyers[msg.sender]transfer(_ticketsPurchased X TICKET_PRICE);
+//    myEvent.buyers[msg.sender].transfer(msg.value - (_ticketsPurchased X TICKET_PRICE))
+      emit LogGetRefund(msg.sender, _ticketsPurchased);
+    }
 
     /*
         Define a function called endSale().
@@ -154,4 +165,12 @@ contract EventTickets {
             - transfer the contract balance to the owner
             - emit the appropriate event
     */
+    function endSale()
+      isOwner()
+    {
+      uint balance = (myEvent.sales X TICKET_PRICE);
+      myEvent.isOpen = false;
+      owner.transfer(balance);
+      emit LogEndSale(owner, balance);
+    }
 }
