@@ -119,11 +119,11 @@ contract EventTickets {
       /*require(
         myEvent.isOpen == true,
         "Verify the event is open"
-      );*/
+      );
       require(
         _ticketsPurchased x TICKET_PRICE < msg.value,
         "Verify transaction value is sufficient for _ticketsPurchased"
-      );
+      );*/
       require(
         myEvent.totalTickets - myEvent.sales > _ticketsPurchased,
         "Verify there are enough tickets in stock"
