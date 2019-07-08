@@ -116,10 +116,10 @@ contract EventTickets {
     function buyTickets(uint _ticketsPurchased)
       payable
     {
-      require(
+      /*require(
         myEvent.isOpen == true,
         "Verify the event is open"
-      );
+      );*/
       require(
         _ticketsPurchased x TICKET_PRICE < msg.value,
         "Verify transaction value is sufficient for _ticketsPurchased"
