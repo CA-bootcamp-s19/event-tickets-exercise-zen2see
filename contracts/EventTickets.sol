@@ -25,7 +25,7 @@ contract EventTickets {
       string URL;
       uint totalTickets;
       uint sales;
-      mapping (address => sales) buyers;
+      mapping (sales => address) buyers;
       bool isOpen;
     }
 
@@ -69,7 +69,9 @@ contract EventTickets {
         Set the owner to the creator of the contract.
         Set the appropriate myEvent details.
     */
-    constructor(string _description, string _URL, uint _totalTickets) {
+    constructor (string memory _description, string memory _URL, uint _totalTickets)
+      public
+    {
       owner = msg.sender;
       myEvent.description = _description;
       myEvent.URL = _URL;
@@ -95,6 +97,7 @@ contract EventTickets {
         returns the number of tickets that address has purchased.
     */
     function getBuyerTicketCount(address) {
+      public
       return myEvent.buyers[address].sales;
     }
 
@@ -114,6 +117,7 @@ contract EventTickets {
             - emit the appropriate event
     */
     function buyTickets(uint _ticketsPurchased)
+      public
       payable
     {
       require(
@@ -143,6 +147,7 @@ contract EventTickets {
             - Emit the appropriate event.
     */
     function getRefund()
+    public
     payable
     {
       require(
@@ -167,6 +172,7 @@ contract EventTickets {
             - emit the appropriate event
     */
     function endSale()
+      public
       isOwner()
     {
       uint balance = (myEvent.sales * TICKET_PRICE);
