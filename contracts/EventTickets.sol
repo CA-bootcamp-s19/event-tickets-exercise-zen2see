@@ -73,7 +73,7 @@ contract EventTickets {
       owner = msg.sender;
       myEvent.description = _description;
       myEvent.URL = _URL;
-      myEvent.totalTickets; = _totalTickets;
+      myEvent.totalTickets = _totalTickets;
     }
 
     /*
