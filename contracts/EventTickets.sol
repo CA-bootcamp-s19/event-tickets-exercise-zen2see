@@ -26,7 +26,7 @@ contract EventTickets {
       uint totalTickets;
       uint sales;
       mapping (address => sales) buyers;
-      bool isOpen
+      bool isOpen;
     }
 
     Event myEvent;

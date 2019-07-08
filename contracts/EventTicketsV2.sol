@@ -8,6 +8,7 @@ contract EventTicketsV2 {
     /*
         Define an public owner variable. Set it to the creator of the contract when it is initialized.
     */
+    address public owner;
     uint   PRICE_TICKET = 100 wei;
 
     /*
@@ -21,12 +22,21 @@ contract EventTicketsV2 {
         Choose the appropriate variable type for each field.
         The "buyers" field should keep track of addresses and how many tickets each buyer purchases.
     */
+    struct Event {
+      string description;
+      string URL;
+      uint totalTickets;
+      uint sales;
+      mapping (address => sales) buyers;
+      bool isOpen;
+    }
 
     /*
         Create a mapping to keep track of the events.
         The mapping key is an integer, the value is an Event struct.
         Call the mapping "events".
     */
+    mapping (uint => Event) events;
 
     event LogEventAdded(string desc, string url, uint ticketsAvailable, uint eventId);
     event LogBuyTickets(address buyer, uint eventId, uint numTickets);
@@ -36,6 +46,13 @@ contract EventTicketsV2 {
     /*
         Create a modifier that throws an error if the msg.sender is not the owner.
     */
+    modifier isOwner() {
+      require(
+        msg.sender == owner,
+        "Only owner can call this function."
+        );
+        _;
+    }
 
     /*
         Define a function called addEvent().
@@ -49,6 +66,15 @@ contract EventTicketsV2 {
             - emit the appropriate event
             - return the event's ID
     */
+    function addEvent(string _description, string _URL, uint _tickets)
+      isOwner()
+    {
+      Event.description = _description;
+      Event.URL = _URL;
+      Event.tickets = _tickets;
+      Event.isOpen = true;
+      Event.
+    }
 
     /*
         Define a function called readEvent().
