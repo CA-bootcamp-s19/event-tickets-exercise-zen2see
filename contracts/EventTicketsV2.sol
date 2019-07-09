@@ -152,7 +152,7 @@ contract EventTicketsV2 {
       payable
     {
       require(
-        events[_eventID].buyers[msg.senders] > 0,
+        events[_eventID].buyers[msg.sender] > 0,
         "Verify users has purchased tickets"
       );
       events[_eventID].sales -= events[_eventID].buyers[msg.sender];
