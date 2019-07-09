@@ -76,8 +76,7 @@ contract EventTicketsV2 {
       isOwner()
       returns (uint)
     {
-      uint eventID = idGenerator;
-      events[eventID] = Event({description: _description, URL: _URL, totalTickets: _totalTickets, sales: 0, isOpen: true
+      events[idGenerator] = Event({description: _description, URL: _URL, totalTickets: _totalTickets, sales: 0, isOpen: true
       });
       idGenerator += 1;
       emit LogEventAdded(_description, _URL, _totalTickets, eventID);
@@ -126,7 +125,7 @@ contract EventTicketsV2 {
         "Verify the event isOpen"
       );
       require(
-        msg.value > (_buyTickets * PRICE_TICKET),
+        msg.value >= (_buyTickets * PRICE_TICKET),
         "Verify enough funds to buy tickets"
       );
       require(
