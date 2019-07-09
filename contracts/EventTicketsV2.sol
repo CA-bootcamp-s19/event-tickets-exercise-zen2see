@@ -71,16 +71,16 @@ contract EventTicketsV2 {
             - emit the appropriate event
             - return the event's ID
     */
-    function addEvent(string memory _description, string memory _URL, uint _tickets)
+    function addEvent(string memory _description, string memory _URL, uint _totalTickets)
       public
       isOwner()
       returns (uint)
     {
       uint eventID = idGenerator;
-      events[eventID] = Event({description: _description, URL: _URL, totalTickets: _tickets, sales: 0, isOpen: true}
-        );
+      events[eventID] = Event({description: _description, URL: _URL, totalTickets: _totalTickets, sales: 0, isOpen: true
+      });
       idGenerator += 1;
-      emit LogEventAdded(_description, _URL, _tickets, eventID);
+      emit LogEventAdded(_description, _URL, _totalTickets, eventID);
       return eventID;
     }
 
@@ -96,10 +96,10 @@ contract EventTicketsV2 {
     */
     function readEvent(uint _eventID)
       public
-      returns (string memory _description, string memory _URL, uint _tickets, uint _sales, bool _isOpen)
+      returns (string memory _description, string memory _URL, uint _totalTickets, uint _sales, bool _isOpen)
     {
       Event memory myEvent = events[_eventID];
-      return (myEvent.description, myEvent.URL, myEvent.tickets, myEvent.sales, myEvent.isOpen);
+      return (myEvent.description, myEvent.URL, myEvent.totalTickets, myEvent.sales, myEvent.isOpen);
     }
 
     /*
