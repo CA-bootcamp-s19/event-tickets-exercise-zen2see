@@ -145,7 +145,7 @@ contract EventTicketsV2 {
             - send appropriate value to the refund requester
             - emit the appropriate event
     */
-    function getRefund(_eventID)
+    function getRefund(uint _eventID)
       public
       payable
       require(
@@ -161,7 +161,7 @@ contract EventTicketsV2 {
         This function takes one parameter, an event ID
         This function returns a uint, the number of tickets that the msg.sender has purchased.
     */
-    getBuyerNumberTickets(_eventID)
+    getBuyerNumberTickets(uint _eventID)
       public
       view
       returns(uint)
@@ -178,7 +178,7 @@ contract EventTicketsV2 {
             - transfer the balance from those event sales to the contract owner
             - emit the appropriate event
     */
-    endSale(_eventID)
+    endSale(uint _eventID)
       public
       payable
       isOwner()
