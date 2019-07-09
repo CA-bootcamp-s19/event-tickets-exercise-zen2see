@@ -53,7 +53,9 @@ contract EventTicketsV2 {
         );
         _;
     }
-    constructor() {
+    constructor()
+    public
+    {
       owner = msg.sender;
     }
 
@@ -96,7 +98,7 @@ contract EventTicketsV2 {
       public
       returns (string memory _description, string memory _URL, uint _tickets, uint _sales, bool _isOpen)
     {
-      Event memory myEvent = events[_eventsID];
+      Event memory myEvent = events[_eventID];
       return (myEvent.description, myEvent.URL, myEvent.tikets, myEvent.sales, myEvent.isOpen);
     }
 
@@ -153,7 +155,7 @@ contract EventTicketsV2 {
         events[_eventID].buyers[msg.senders] > 0,
         "Verify users has purchased tickets"
       );
-      events[_eventID].sales -= events[_eventsID].buyers[msg.sender];
+      events[_eventID].sales -= events[_eventID].buyers[msg.sender];
       msg.sender.transfer(events[_eventID].buyers[msg.sender] * PRICE_TICKET);
       emit LogGetRefund(msg.sender, _eventID, events[_eventID].buyers[msg.sender]);
     }
