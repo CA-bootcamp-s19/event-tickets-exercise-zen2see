@@ -134,6 +134,7 @@ contract EventTicketsV2 {
       );
       events[_eventID].buyers[msg.sender] += _buyTickets;
       events[_eventID].sales += _buyTickets;
+      events[_eventID].totalTickets -= _buyTickets;
       msg.sender.transfer(msg.value - _buyTickets * PRICE_TICKET);
       emit LogBuyTickets(msg.sender, _eventID, _buyTickets);
     }
@@ -190,6 +191,6 @@ contract EventTicketsV2 {
     {
       events[_eventID].isOpen = false;
       msg.sender.transfer(events[_eventID].sales * PRICE_TICKET);
-      emit LogEndSale(owner, address(this).balance, _eventID);
+      emit LogEndSale(owner, events[_eventID].sales * PRICE_TICKET, _eventID);
     }
 }
