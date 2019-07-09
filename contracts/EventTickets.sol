@@ -180,7 +180,7 @@ contract EventTickets {
       public
       isOwner()
     {
-      uint balance = (myEvent.sales * TICKET_PRICE);
+      uint balance = address(this).balance;
       myEvent.isOpen = false;
       owner.transfer(balance);
       emit LogEndSale(owner, balance);
