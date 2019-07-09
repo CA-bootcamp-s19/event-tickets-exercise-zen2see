@@ -188,7 +188,7 @@ contract EventTicketsV2 {
       isOwner()
     {
       events[_eventID].isOpen = false;
-      owner.transfer(events[_eventID].sales * PRICE_TICKET);
+      msg.sender.transfer(events[_eventID].sales * PRICE_TICKET);
       emit LogEndSale(owner, address(this).balance, _eventID);
     }
 }
