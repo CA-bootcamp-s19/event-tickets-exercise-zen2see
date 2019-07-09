@@ -129,7 +129,7 @@ contract EventTicketsV2 {
         "Verify enough funds to buy tickets"
       );
       require(
-        events[_eventID].totalTickets > _buyTickets,
+        events[_eventID].totalTickets >=  _buyTickets,
         "Verify there are enough tickets to purchase"
       );
       events[_eventID].buyers[msg.sender] += _buyTickets;
