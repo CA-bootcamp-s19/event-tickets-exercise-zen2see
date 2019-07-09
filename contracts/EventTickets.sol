@@ -138,7 +138,7 @@ contract EventTickets {
       myEvent.buyers[msg.sender] += _ticketsPurchased;
       myEvent.sales += _ticketsPurchased;
       msg.sender.transfer(msg.value - (_ticketsPurchased * TICKET_PRICE));
-      emit LogBuyTickets(msg.sender, _ticketsPurchased)
+      emit LogBuyTickets(msg.sender, _ticketsPurchased);
     }
 
     /*
