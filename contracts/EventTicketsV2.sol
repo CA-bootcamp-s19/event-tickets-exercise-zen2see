@@ -180,7 +180,7 @@ contract EventTicketsV2 {
             - transfer the balance from those event sales to the contract owner
             - emit the appropriate event
     */
-    endSale(uint _eventID)
+    function endSale(uint _eventID)
       public
       payable
       isOwner()
