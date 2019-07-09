@@ -157,13 +157,13 @@ contract EventTicketsV2 {
       msg.sender.transfer(events[_eventID].buyers[msg.sender] * PRICE_TICKET);
       emit LogGetRefund(msg.sender, _eventID, events[_eventID].buyers[msg.sender]);
     }
-    
+
     /*
         Define a function called getBuyerNumberTickets()
         This function takes one parameter, an event ID
         This function returns a uint, the number of tickets that the msg.sender has purchased.
     */
-    getBuyerNumberTickets(uint _eventID)
+    function getBuyerNumberTickets(uint _eventID)
       public
       view
       returns(uint)
