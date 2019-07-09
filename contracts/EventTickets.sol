@@ -99,6 +99,7 @@ contract EventTickets {
     */
     function getBuyerTicketCount(address buyer)
       public
+      view
       returns (uint)
     {
       return myEvent.buyers[buyer];
