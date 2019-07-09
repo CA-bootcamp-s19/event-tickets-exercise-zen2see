@@ -75,7 +75,8 @@ contract EventTicketsV2 {
       returns (uint)
     {
       uint eventID = idGenerator;
-      events[eventID] = Event(description: _description, URL: _URL, totalTickets: _tickets, isOpen: true);
+      events[eventID] = Event({description: _description, URL: _URL, totalTickets: _tickets, isOpen: true}
+        );
       idGenerator += 1;
       emit LogEventAdded(_description, _URL, _tickets, eventID);
       return eventID;
