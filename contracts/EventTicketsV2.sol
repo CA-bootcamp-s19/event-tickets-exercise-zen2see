@@ -79,8 +79,8 @@ contract EventTicketsV2 {
       events[idGenerator] = Event({description: _description, URL: _URL, totalTickets: _totalTickets, sales: 0, isOpen: true
       });
       idGenerator += 1;
-      emit LogEventAdded(_description, _URL, _totalTickets, eventID);
-      return eventID;
+      emit LogEventAdded(_description, _URL, _totalTickets, idGenerator);
+      return idGenerator;
     }
 
     /*
