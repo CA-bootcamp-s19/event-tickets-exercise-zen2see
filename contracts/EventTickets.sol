@@ -164,7 +164,7 @@ contract EventTickets {
 //      delete myEvent.buyers[msg.sender];
       msg.sender.transfer(returnedTickets * TICKET_PRICE);
 //    myEvent.buyers[msg.sender].transfer(msg.value - (_ticketsPurchased X TICKET_PRICE))
-      emit LogGetRefund(msg.sender, returnedTickets;
+      emit LogGetRefund(msg.sender, returnedTickets);
     }
 
     /*
