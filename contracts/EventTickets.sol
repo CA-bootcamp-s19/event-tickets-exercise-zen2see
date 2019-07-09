@@ -76,6 +76,7 @@ contract EventTickets {
       myEvent.description = _description;
       myEvent.URL = _URL;
       myEvent.totalTickets = _totalTickets;
+      myEvent.isOpen = true;
     }
 
     /*
@@ -96,11 +97,11 @@ contract EventTickets {
         This function takes 1 argument, an address and
         returns the number of tickets that address has purchased.
     */
-    function getBuyerTicketCount(address)
+    function getBuyerTicketCount(address buyer)
       public
       returns (uint)
     {
-      return myEvent.buyers[address].totalTickets;
+      return myEvent.buyers[buyer];
     }
 
     /*
@@ -134,9 +135,10 @@ contract EventTickets {
         myEvent.totalTickets - myEvent.sales > _ticketsPurchased,
         "Verify there are enough tickets in stock"
       );
-      myEvent.buyers[msg.sender].totalTickets += _ticketsPurchased;
+      myEvent.buyers[msg.sender] += _ticketsPurchased;
       myEvent.sales += _ticketsPurchased;
-      myEvent.buyers[msg.sender].transfer(msg.value - (_ticketsPurchased * TICKET_PRICE));
+      msg.sender.transfer(msg.value - (_ticketsPurchased * TICKET_PRICE));
+      emit LogBuyTickets(msg.sender, _ticketsPurchased)
     }
 
     /*
@@ -153,14 +155,16 @@ contract EventTickets {
     payable
     {
       require(
-        myEvent.buyers[msg.sender].sales > 0,
+        myEvent.buyers[msg.sender] > 0,
         "Verify requester has purchased tickets"
       );
-      myEvent.totalTickets += getBuyerTicketCount(msg.sender);
+      uint returnedTickets = getBuyerTicketCount(msg.sender);
+      myEvent.totalTickets += returnedTickets;
+      myEvent.sales -= returnedTickets;
 //      delete myEvent.buyers[msg.sender];
-      myEvent.buyers[msg.sender].transfer(getBuyerTicketCount(msg.sender) * TICKET_PRICE);
+      msg.sender.transfer(returnedTickets * TICKET_PRICE);
 //    myEvent.buyers[msg.sender].transfer(msg.value - (_ticketsPurchased X TICKET_PRICE))
-      emit LogGetRefund(msg.sender, getBuyerTicketCount(msg.sender));
+      emit LogGetRefund(msg.sender, returnedTickets;
     }
 
     /*
