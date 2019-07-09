@@ -148,6 +148,7 @@ contract EventTicketsV2 {
     function getRefund(uint _eventID)
       public
       payable
+    {
       require(
         events[_eventID].buyers[msg.senders] > 0,
         "Verify users has purchased tickets"
@@ -155,7 +156,8 @@ contract EventTicketsV2 {
       events[_eventID].sales -= events[_eventsID].buyers[msg.sender];
       msg.sender.transfer(events[_eventID].buyers[msg.sender] * PRICE_TICKET);
       emit LogGetRefund(msg.sender, _eventID, events[_eventID].buyers[msg.sender]);
-
+    }
+    
     /*
         Define a function called getBuyerNumberTickets()
         This function takes one parameter, an event ID
