@@ -96,6 +96,7 @@ contract EventTicketsV2 {
     */
     function readEvent(uint _eventID)
       public
+      view
       returns (string memory _description, string memory _URL, uint _totalTickets, uint _sales, bool _isOpen)
     {
       Event memory myEvent = events[_eventID];
@@ -118,6 +119,7 @@ contract EventTicketsV2 {
     */
     function buyTickets(uint _eventID, uint _buyTickets)
       public
+      payable
     {
       require(
         events[_eventID].isOpen == true,
